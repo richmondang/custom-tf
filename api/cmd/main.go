@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/richmondang/terraform-example-apex/api/pkg/handlers"
 
 )
 

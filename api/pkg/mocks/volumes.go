@@ -2,7 +2,7 @@ package mocks
 
 import (
 	"net/http"
-	"api/pkg/models"
+	"github.com/richmondang/terraform-example-apex/api/pkg/models"
 )
 
 var Volumes = []models.Volume{
