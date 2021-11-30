@@ -1,4 +1,4 @@
-# Creating Custom Terraform Provider - APEX Console (Test)
+# APEX Console - Custom Terraform Provider (Test)
 
 ## Initial Environment Setup
 
