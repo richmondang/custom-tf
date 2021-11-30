@@ -1,4 +1,4 @@
-package main
+package api
 
 import (
 	"encoding/json"
@@ -7,7 +7,6 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/richmondang/terraform-example-apex/api/pkg/handlers"
-
 )
 
 func main() {

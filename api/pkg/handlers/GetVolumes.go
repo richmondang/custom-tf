@@ -5,7 +5,6 @@ import (
     "net/http"
 
     "github.com/richmondang/terraform-example-apex/api/pkg/models"
-
 )
 
 func GetAllVolumes(w http.ResponseWriter, r *http.Request) {
