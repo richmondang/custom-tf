@@ -1,4 +1,4 @@
-package main
+package models
 
 // Volume - volume properties
 type Volume struct {
