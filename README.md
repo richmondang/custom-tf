@@ -21,11 +21,13 @@ sudo cp go /usr/local/bin/
 sudo cp gofmt /usr/local/bin/
 ```
 
-## Install Terraform
+## Install Terraform (Ubuntu)
+- Reference: https://learn.hashicorp.com/tutorials/terraform/install-cli
 ```
+sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
 curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-sudo apt install terraform
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+sudo apt-get update && sudo apt-get install terraform
 ```
 
 ## Creating Custom Terraform Provider Executable
@@ -47,3 +49,4 @@ cp terraform-provider-apex ~/.terraform.d/plugins/terraform-apex.com/apexprovide
 - Custom Terraform Provider Executable must be located in a Terraform Plugins Directory for Terraform to recognize:
     - Linux: `~/.terraform.d/plugins/${host_name}/${namespace}/${type}/${version}/${target}`
     - Windows: `%APPDATA%\terraform.d\plugins\${host_name}/${namespace}/${type}/${version}/${target}`
+- Terraform searches for plugins in the format of `terraform-<TYPE>-<NAME>`, in the above example `terraform-provider-apex`, the custom plugin is of type `provider` named `apex`
