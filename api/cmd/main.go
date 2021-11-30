@@ -6,9 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"api/pkg/handlers"
-	"api/pkg/mocks"
-	"api/pkg/models"
+
 )
 
 func main() {
@@ -20,6 +18,6 @@ func main() {
 
 	router.HandleFunc("/subscription/volume", handlers.GetAllVolumes).Methods(http.MethodGet)
 
-	log.Println("API is running!")
+	log.Println("Webserver running")
 	http.ListenAndServe(":4000", router)
 }

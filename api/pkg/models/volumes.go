@@ -1,9 +1,5 @@
 package main
 
-// import (
-// 	"net/http"
-// )
-
 // Volume - volume properties
 type Volume struct {
 	ID                       string               `json:"id,omitempty"`
