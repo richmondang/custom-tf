@@ -69,3 +69,4 @@ Custom Terraform Provider Executable must be located in a Terraform Plugins Dire
     - Windows: `%APPDATA%\terraform.d\plugins\${host_name}/${namespace}/${type}/${version}/${target}`
 Terraform searches for plugins in the format of `terraform-<TYPE>-<NAME>`, in the above example `terraform-provider-apex`, the custom plugin is of type `provider` named `apex`
 
+## If error initializing Terraform
