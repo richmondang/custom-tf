@@ -7,7 +7,6 @@ import (
 )
 
 //Resources and data sources names must follow <provider>_<resource_name> convention
-// func Provider() *schema.Provider {
 func Provider() terraform.ResourceProvider {
 	return &schema.Provider{
 		Schema: map[string]*schema.Schema{
@@ -30,7 +29,6 @@ func Provider() terraform.ResourceProvider {
 		ResourcesMap: map[string]*schema.Resource{
 			"apex_example_server": resourceServer(),
 			"apex_example_volume": resourceVolume(),
-			"apex_example_item":   resourceItem(),
 		},
 		ConfigureFunc: providerConfigure,
 		// DataSourcesMap: map[string]*schema.Resource{

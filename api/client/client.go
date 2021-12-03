@@ -29,65 +29,65 @@ func NewClient(hostname string, port int, token string) *Client {
 	}
 }
 
-// GetAll Retrieves all of the Items from the server
-func (c *Client) GetAll() (*map[string]server.Item, error) {
-	body, err := c.httpRequest("item", "GET", bytes.Buffer{})
+// Get all volumes info
+func (c *Client) GetAll() (*map[string]server.Volume, error) {
+	body, err := c.httpRequest("volume", "GET", bytes.Buffer{})
 	if err != nil {
 		return nil, err
 	}
-	items := map[string]server.Item{}
-	err = json.NewDecoder(body).Decode(&items)
+	volumes := map[string]server.Volume{}
+	err = json.NewDecoder(body).Decode(&volumes)
 	if err != nil {
 		return nil, err
 	}
-	return &items, nil
+	return &volumes, nil
 }
 
-// GetItem gets an item with a specific name from the server
-func (c *Client) GetItem(name string) (*server.Item, error) {
-	body, err := c.httpRequest(fmt.Sprintf("item/%v", name), "GET", bytes.Buffer{})
+// Get volume by ID
+func (c *Client) GetVolume(name string) (*server.Volume, error) {
+	body, err := c.httpRequest(fmt.Sprintf("volume/%v", name), "GET", bytes.Buffer{})
 	if err != nil {
 		return nil, err
 	}
-	item := &server.Item{}
-	err = json.NewDecoder(body).Decode(item)
+	volume := &server.Volume{}
+	err = json.NewDecoder(body).Decode(volume)
 	if err != nil {
 		return nil, err
 	}
-	return item, nil
+	return volume, nil
 }
 
-// NewItem creates a new Item
-func (c *Client) NewItem(item *server.Item) error {
+// Create a new volume
+func (c *Client) NewVolume(volume *server.Volume) error {
 	buf := bytes.Buffer{}
-	err := json.NewEncoder(&buf).Encode(item)
+	err := json.NewEncoder(&buf).Encode(volume)
 	if err != nil {
 		return err
 	}
-	_, err = c.httpRequest("item", "POST", buf)
+	_, err = c.httpRequest("volume", "POST", buf)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-// UpdateItem updates the values of an item
-func (c *Client) UpdateItem(item *server.Item) error {
+// updates specific volume by ID
+func (c *Client) UpdateVolume(volume *server.Volume) error {
 	buf := bytes.Buffer{}
-	err := json.NewEncoder(&buf).Encode(item)
+	err := json.NewEncoder(&buf).Encode(volume)
 	if err != nil {
 		return err
 	}
-	_, err = c.httpRequest(fmt.Sprintf("item/%s", item.Name), "PUT", buf)
+	_, err = c.httpRequest(fmt.Sprintf("volume/%s", volume.ID), "PUT", buf)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-// DeleteItem removes an item from the server
-func (c *Client) DeleteItem(itemName string) error {
-	_, err := c.httpRequest(fmt.Sprintf("item/%s", itemName), "DELETE", bytes.Buffer{})
+// Delete volume by ID
+func (c *Client) DeleteVolume(volumeName string) error {
+	_, err := c.httpRequest(fmt.Sprintf("volume/%s", volumeName), "DELETE", bytes.Buffer{})
 	if err != nil {
 		return err
 	}

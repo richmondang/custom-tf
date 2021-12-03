@@ -8,20 +8,18 @@ import (
 )
 
 
-// Service holds the map of items and provides methods CRUD operations on the map
+
 type Service struct {
 	connectionString string
-	items            map[string]Item
 	volumes			map[string]Volume
 	sync.RWMutex
 }
 
-// NewService returns a Service with a connectionString configured and can be a map of items setup. The items map can be empty,
-// or can contain items
-func NewService(connectionString string, items map[string]Item) *Service {
+
+func NewService(connectionString string, volumes map[string]Volume) *Service {
 	return &Service{
 		connectionString: connectionString,
-		items:            items,
+		volumes:            volumes,
 	}
 }
 
@@ -38,31 +36,20 @@ func NewService(connectionString string, items map[string]Item) *Service {
 
 
 
-
 // ListenAndServe registers the routes to the server and starts the server on the host:port configured in Service
 func (s *Service) ListenAndServe() error {
 	r := mux.NewRouter()
 
-	// Each handler is wrapped in logs() and auth() to log out the method and path and to
-	// ensure that a non-empty Authorization header is present
-	r.HandleFunc("/item", logs(auth(s.PostItem))).Methods("POST")
-	r.HandleFunc("/item", logs(auth(s.GetItems))).Methods("GET")
-	r.HandleFunc("/item/{name}", logs(auth(s.GetItem))).Methods("GET")
-	r.HandleFunc("/item/{name}", logs(auth(s.PutItem))).Methods("PUT")
-	r.HandleFunc("/item/{name}", logs(auth(s.DeleteItem))).Methods("DELETE")
-
-
-	//Volume Routes
-	//Update Volume
+	//Create Volume
 	r.HandleFunc("/volume", logs(auth(s.CreateVolume))).Methods("POST")
-	//Get Storage volume information
-	r.HandleFunc("/volume", logs(auth(s.GetVolumeInfo))).Methods("GET")
-	//Get Volume information by ID
-	// r.HandleFunc("/volume/{vol_id}", logs(auth(s.GetItem))).Methods("GET")
-	// //Update volume by ID
-	// r.HandleFunc("/volume/{vol_id}", logs(auth(s.PutItem))).Methods("PUT")
-	// //Delete storage volume by ID
-	// r.HandleFunc("/volume/{vol_id}", logs(auth(s.DeleteItem))).Methods("DELETE")
+	//Get Volumes info
+	r.HandleFunc("/volume", logs(auth(s.GetVolumes))).Methods("GET")
+	//Get volume by ID
+	r.HandleFunc("/volume/{vol_id}", logs(auth(s.GetVolume))).Methods("GET")
+	//Update volume info by ID
+	r.HandleFunc("/volume/{vol_id}", logs(auth(s.UpdateVolume))).Methods("PUT")
+	//Delete volume by ID
+	r.HandleFunc("/volume/{vol_id}", logs(auth(s.DeleteVolume))).Methods("DELETE")
 
 
 	log.Printf("Starting server on %s", s.connectionString)
