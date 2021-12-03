@@ -34,6 +34,10 @@ go mod tidy
 go run .
 ```
 This will run locally on localhost:3001
+- To test API:
+```
+curl -H "Authorization: authToken" http://localhost:3001/volume | jq
+```
 
 
 ## Set Go Environment Variable to run API server, tests and build provider
