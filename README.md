@@ -37,10 +37,16 @@ This will run locally on localhost:3001
 
 
 ## Set Go Environment Variable to run API server, tests and build provider
+Check environment variables `go env`. If GO111Module="", set:
 ```
 export GO111MODULE=on
 ```
 
+## Clean Go Module Cache
+When making changes to client and server packages, clear GOMODCACHE to download updated modules
+```
+go clean -modcache
+```
 
 ## Creating Custom Terraform Provider Executable
 After building Go code, create terraform provider executable and copy to appropriate directory structure:
