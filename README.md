@@ -1,4 +1,4 @@
-# APEX Console - Custom Terraform Provider Example
+# APEX Custom Terraform Provider Example
 
 ## Initial Environment Setup
 
@@ -41,11 +41,6 @@ This will run locally on localhost:3001
 export GO111MODULE=on
 ```
 
-## Terraform Tests
-```
-TF_ACC=true SERVICE_ADDRESS=http://localhost SERVICE_PORT=3001 SERVICE_TOKEN=superSecret go test -v provider/*
-```
-
 
 ## Creating Custom Terraform Provider Executable
 After building Go code, create terraform provider executable and copy to appropriate directory structure:
@@ -57,7 +52,7 @@ go mod tidy
 go build -o terraform-provider-apex
 cp terraform-provider-apex ~/.terraform.d/plugins/terraform-apex.com/apexprovider/apex/1.0.0/linux_amd64
 ```
-Alternatively, execute `scripts/build.sh` bash script
+Alternatively, execute `scripts/build.sh` bash script from root folder:
 ```
 ./scripts/build.sh
 ```
