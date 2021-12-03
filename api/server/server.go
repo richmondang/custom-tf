@@ -7,10 +7,12 @@ import (
 	"sync"
 )
 
+
 // Service holds the map of items and provides methods CRUD operations on the map
 type Service struct {
 	connectionString string
 	items            map[string]Item
+	volumes			map[string]Volume
 	sync.RWMutex
 }
 
@@ -23,6 +25,20 @@ func NewService(connectionString string, items map[string]Item) *Service {
 	}
 }
 
+
+// func runServer(connection string) error {
+
+// 	router := mux.NewRouter()
+// 	router.HandleFunc("/volume", logs(auth(getVolume)))
+
+// 	// start server
+// 	log.Println("Starting API server at ", connection)
+// 	return http.ListenAndServe(connection, router)
+// }
+
+
+
+
 // ListenAndServe registers the routes to the server and starts the server on the host:port configured in Service
 func (s *Service) ListenAndServe() error {
 	r := mux.NewRouter()
@@ -34,6 +50,20 @@ func (s *Service) ListenAndServe() error {
 	r.HandleFunc("/item/{name}", logs(auth(s.GetItem))).Methods("GET")
 	r.HandleFunc("/item/{name}", logs(auth(s.PutItem))).Methods("PUT")
 	r.HandleFunc("/item/{name}", logs(auth(s.DeleteItem))).Methods("DELETE")
+
+
+	//Volume Routes
+	//Update Volume
+	r.HandleFunc("/volume", logs(auth(s.CreateVolume))).Methods("POST")
+	//Get Storage volume information
+	r.HandleFunc("/volume", logs(auth(s.GetVolumeInfo))).Methods("GET")
+	//Get Volume information by ID
+	// r.HandleFunc("/volume/{vol_id}", logs(auth(s.GetItem))).Methods("GET")
+	// //Update volume by ID
+	// r.HandleFunc("/volume/{vol_id}", logs(auth(s.PutItem))).Methods("PUT")
+	// //Delete storage volume by ID
+	// r.HandleFunc("/volume/{vol_id}", logs(auth(s.DeleteItem))).Methods("DELETE")
+
 
 	log.Printf("Starting server on %s", s.connectionString)
 	err := http.ListenAndServe(s.connectionString, r)

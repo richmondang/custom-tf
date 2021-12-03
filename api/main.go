@@ -9,6 +9,12 @@ import (
 )
 
 func main() {
+
+	//Run Server
+	// if err := server.runServer("localhost:8080"); err != nil {
+	// 	log.Println(err)
+	// }
+
 	seed := flag.String("seed", "", "a file location with some data in JSON form to seed the server content")
 	flag.Parse()
 

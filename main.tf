@@ -1,3 +1,23 @@
+provider "apex" {
+  address = "http://localhost"
+  port    = "3001"
+  token   = "authToken"
+}
+
+resource "apex_example_item" "test_item" {
+  name = "new_apex_item"
+  description = "Adding a test item"
+  tags = [
+      "testing tag",
+      "dev tag"
+  ]
+}
+
+output "test_item_output" {
+    value = apex_example_item.test_item
+}
+
+
 resource "apex_example_server" "richang-server" {
 	server_count = "1"
 }
