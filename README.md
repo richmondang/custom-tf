@@ -74,3 +74,4 @@ Custom Terraform Provider Executable must be located in a Terraform Plugins Dire
 Terraform searches for plugins in the format of `terraform-<TYPE>-<NAME>`, in the above example `terraform-provider-apex`, the custom plugin is of type `provider` named `apex`
 
 ## If error initializing Terraform
+Delete the `.terraform.lock.hcl` file from the root folder and run `terraform init` again
